@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -13,9 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private float verticalRotation = 0f;
 
     public Transform Muzzle;
-    public GameObject Bullet;
-
-    Transform BulletRotation;
+    //public GameObject Bullet;
 
     // Start is called before the first frame update
     void Start()
@@ -33,29 +33,25 @@ public class PlayerMovement : MonoBehaviour
 
         transform.Rotate(Vector3.up * mouseX);
 
-        verticalRotation -= mouseY;
-        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
-        cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
-        Muzzle.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
-
+       verticalRotation -= mouseY;
+       verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
+       cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+      Muzzle.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+ 
         float moveX = Input.GetAxis("Horizontal"); //키보드의 A, D 입력 시
         float moveZ = Input.GetAxis("Vertical"); // 키보드의 W, S 입력 시
 
         Vector3 move = transform.right * moveX + transform.forward * moveZ; // 실제 이동 처리.
         controller.Move(move * speed * Time.deltaTime);
 
-        LoadBullet();
+        //LoadBullet();
     }
 
-    void LoadBullet() // 총알이 총구에서 생성
+    /*void LoadBullet() // 총알이 총구에서 생성
     {
         if (Input.GetMouseButtonDown(0)) // 마우스 왼쪽버튼 클릭시 총알이 총구의 위치와 방향에 맞게 생성됨
         {
-            //BulletRotation.transform.Rotate(Muzzle.rotation.x, Muzzle.rotation.y, Bullet.transform.rotation.z);
-            //BulletRotation.rotation = Quaternion.Euler(Muzzle.rotation.x, Muzzle.rotation.y, Bullet.transform.rotation.z);
-            //Instantiate(Bullet, Muzzle.transform.position,BulletRotation.rotation);
-            //Instantiate(Bullet, Muzzle.transform.position, Bullet.transform.rotation);
-            Instantiate(Bullet, Muzzle.transform.position, Muzzle.transform.rotation);
+            Instantiate(Bullet,Muzzle.transform.position, Muzzle.transform.rotation);
         }
-    }
+    }*/
 }
