@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -35,6 +36,16 @@ public class Bullet : MonoBehaviour
             Destroy(collision.gameObject);
             Destroy(gameObject);
             Destroy(hitEffect,1);
+        }
+        if(collision.gameObject.tag =="Enemy")
+        {
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.Dead();
+                Destroy(gameObject);
+                Destroy(collision.gameObject, 5);
+            }
         }
        /*else // 태그가 타겟이 아닌 오브젝트에 충돌시 총알 파괴
         {
