@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Animator animator;
+    //public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +19,14 @@ public class Enemy : MonoBehaviour
 
     public void Dead()
     {
-        animator.SetBool("dead", true);
+        //animator.SetBool("dead", true);
+    }
+    public void ProcessDead()
+    {
+        WaveManager manager = GameObject.FindObjectOfType<WaveManager>();
+        if (manager != null)
+        {
+            manager.OnEnemyDefeated();
+        }
     }
 }

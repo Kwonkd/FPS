@@ -42,9 +42,10 @@ public class Bullet : MonoBehaviour
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemy.Dead();
+                //enemy.Dead();
+                enemy.ProcessDead();
                 Destroy(gameObject);
-                Destroy(collision.gameObject, 5);
+                Destroy(enemy.gameObject);
             }
         }
        /*else // 태그가 타겟이 아닌 오브젝트에 충돌시 총알 파괴
