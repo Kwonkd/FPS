@@ -7,6 +7,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public ParticleSystem prefab_hitEffect;
+    public int damage = 1;
 //    public float shootPower = 5.0f; // 총알이 날라가는 속도 결정
 //    Rigidbody rb;
     // Start is called before the first frame update
@@ -43,9 +44,10 @@ public class Bullet : MonoBehaviour
             if (enemy != null)
             {
                 //enemy.Dead();
-                enemy.ProcessDead();
+                //enemy.ProcessDead();
                 Destroy(gameObject);
-                Destroy(enemy.gameObject);
+                //Destroy(enemy.gameObject);
+                enemy.TakeDamage(damage);
             }
         }
        /*else // 태그가 타겟이 아닌 오브젝트에 충돌시 총알 파괴

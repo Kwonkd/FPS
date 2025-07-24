@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Transform cameraTransform; // 메인 카메라 참조.
     private float verticalTrotation = 0f; //상하 카메라 회전 값 누적 저장.
     private float verticalRotation = 0f;
+    public int score = 0;
 
     public Transform Muzzle;
     //public GameObject Bullet;
