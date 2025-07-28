@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public Transform player;
     public GameObject enemyPrefab; // 적 프리팹 참조 변수
     public Transform[] spawnPoints; // 생성 위치를 참조할 배열
     public float spawnInterval = 2.0f; // 적 생성 간격
@@ -33,7 +34,12 @@ public class EnemySpawner : MonoBehaviour
         while (spawned < enemiesPerWave)
         {
             int idx = Random.Range(0, spawnPoints.Length);
-            Instantiate(enemyPrefab, spawnPoints[idx].position, Quaternion.identity);
+            GameObject obj = Instantiate(enemyPrefab, spawnPoints[idx].position, Quaternion.identity);
+            EnemyAI enemyAI = obj.GetComponent<EnemyAI>();
+            if(enemyAI != null)
+            {
+                enemyAI.SetTarget(player);
+            }
             ++spawned;
             yield return new WaitForSeconds(spawnInterval);
         }

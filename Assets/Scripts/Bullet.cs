@@ -40,7 +40,7 @@ public class Bullet : MonoBehaviour
         }
         if(collision.gameObject.tag =="Enemy")
         {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            EnemyAI enemy = collision.gameObject.GetComponent<EnemyAI>();
             if (enemy != null)
             {
                 //enemy.Dead();
