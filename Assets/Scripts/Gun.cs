@@ -13,6 +13,8 @@ public class Gun : MonoBehaviour
     public ParticleSystem muzzleFlash; // 총알 발사 시 재생할 이펙트 객체
     public AudioSource fireSound; // 총알 발사 시 재생할 사운드 객체
 
+    public BulletPool bulletPool;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +36,8 @@ public class Gun : MonoBehaviour
 
     void Shoot()
     {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        //GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bullet = bulletPool.GetBullet(firePoint.position, firePoint.rotation);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.AddForce(firePoint.forward * bulletForce);
 
@@ -48,7 +51,7 @@ public class Gun : MonoBehaviour
             fireSound.Play();
         }
 
-        Destroy(bullet, 1);
+        //Destroy(bullet, 1);
 
         --currentAmmo;
     }

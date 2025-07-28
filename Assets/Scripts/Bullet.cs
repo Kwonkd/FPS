@@ -45,14 +45,19 @@ public class Bullet : MonoBehaviour
             {
                 //enemy.Dead();
                 //enemy.ProcessDead();
-                Destroy(gameObject);
+                //Destroy(gameObject);
                 //Destroy(enemy.gameObject);
                 enemy.TakeDamage(damage);
             }
         }
-       /*else // 태그가 타겟이 아닌 오브젝트에 충돌시 총알 파괴
+        else // 충돌하지 않았을 경우 총알이 1초 뒤에 비활성화
         {
-            Destroy(gameObject); 
-        }*/
+            Invoke("SetActiveBullet", 1);
+        }
+    }
+
+    void SetActiveBullet()
+    {
+        gameObject.SetActive(false);
     }
 }

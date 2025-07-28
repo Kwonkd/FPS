@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1834131099252245298}
   - component: {fileID: 215813030712595144}
   - component: {fileID: 7056610071288129188}
-  - component: {fileID: 6272050502944668654}
   - component: {fileID: -293988824437461425}
+  - component: {fileID: -8599709081708085996}
   m_Layer: 0
   m_Name: Prefab_Bullet
   m_TagString: Untagged
@@ -109,7 +109,21 @@ CapsuleCollider:
   m_Height: 2.8
   m_Direction: 1
   m_Center: {x: 0.0000000745058, y: -0.0025254486, z: -0.000000074505806}
---- !u!54 &6272050502944668654
+--- !u!114 &-293988824437461425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347075842350704142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2767377ed45cf4f439bce2290e11be45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab_hitEffect: {fileID: 1508431698269775038, guid: d48004f2e38e0f54b99c134618b4513d, type: 3}
+  damage: 1
+--- !u!54 &-8599709081708085996
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,16 +150,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-293988824437461425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1347075842350704142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2767377ed45cf4f439bce2290e11be45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab_hitEffect: {fileID: 1508431698269775038, guid: d48004f2e38e0f54b99c134618b4513d, type: 3}
