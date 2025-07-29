@@ -5,43 +5,20 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    //public Animator animator;
-    // Start is called before the first frame update
-    public int maxHp = 3;
-    public int currentHp;
-    public int score = 10;
-    void Start()
-    {
-        currentHp = maxHp;
-    }
+    public int health = 50; // 적 체력
 
-    // Update is called once per frame
-    void Update()
+    //대미지 처리 함수
+    public void TakeDamage(int damage)
     {
-        
-    }
-
-    public void Dead()
-    {
-        //animator.SetBool("dead", true);
-    }
-    public void ProcessDead()
-    {
-        WaveManager manager = GameObject.FindObjectOfType<WaveManager>();
-        if (manager != null)
+        health -= damage;
+        if (health <= 0)
         {
-            manager.OnEnemyDefeated();
+            Die();
         }
     }
-    virtual public void TakeDamage(int damage)
+
+    void Die()
     {
-        PlayerMovement player = GameObject.FindObjectOfType<PlayerMovement>();
-        currentHp -= damage;
-        if (currentHp <= 0)
-        {
-            player.score += score;
-            ProcessDead();
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 }

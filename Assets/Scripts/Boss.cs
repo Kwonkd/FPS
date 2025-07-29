@@ -5,7 +5,7 @@ using UnityEngine;
 public class Boss : Enemy
 {
     // Start is called before the first frame update
-    void Start()
+/*    void Start()
     {
         maxHp = 10;
         score = 50;
@@ -33,5 +33,5 @@ public class Boss : Enemy
             ProcessDead();
             Destroy(gameObject);
         }
-    }
+    }*/
 }

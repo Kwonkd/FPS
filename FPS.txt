@@ -1,5 +1,16 @@
 FPS - First Person Shooter (1인칭 슈터)
 
+Asset
+ - Prefabs : 총, 플레이어, 적 타겟
+ - Scripts : Gun, Enemy
+ - Effect : 총기 발사 이펙트
+ - UI : Canvas, AmmoText
+
+씬(하이아라키)
+ - 바닥(Plane)
+ - 적(Cube, Capsule) : Tag = Enemy
+ - FPS_Player (카메라, Gun 연결)
+
 오늘의 목표
 - FPS 게임의 구조 이해
 	1인칭 시점 카메라 : 몰입도가 높다. 멀미를 유발 
@@ -107,6 +118,7 @@ ObjectPooling - 자주 쓰일만한 오브젝트는 미리 씬에 여러개 배�
 
 Invoke
 
+Raycast
 
 7.17
 1인칭 카메라 배치
@@ -155,3 +167,12 @@ Enemy 클래스를 상속받는 BossMonster 클래스 작성
 7.25
 지금까진 총을 쏠 때 매번 Prefab을 실시간으로 불러왔음. 이런 방식은 총알이 여러개 생성될 경우 부하가 심하다.
 ObjectPooling을 사용해서 총알을 활성화/비활성화
+
+7.28
+총기 발사 시스템을 다른 방식으로 구현
+ - 코드 상에서 충돌 체크를 직접 구현
+
+전체적인 총기 시스템 구조
+ - 입력(마우스 버튼) -> 총알(Raycast) -> 오브젝트 충돌 및 대미지 -> UI 연동
+
+

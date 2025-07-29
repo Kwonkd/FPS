@@ -1,58 +1,73 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    public GameObject bulletPrefab; // 총알 프리팹
-    public Transform firePoint; // 발사 지점
-    public float bulletForce = 1000f; // 발사 힘
+    [Header("총기 기본 세팅")]
+    public int maxAmmo = 30; // 최대 탄약 개수
+    public int currentAmmo; // 현재 남은 탄약 개수
+    public float fireRate = 0.2f; // 연사 속도
+    public float range = 50.0f; //총알 사정거리
+    public int damage = 10; // 한 발 당 대미지
+    public Camera fpsCamera; // 발사 카메라
+    public ParticleSystem muzzleFlash; // 총구 이팩트
+    public GameObject impactEffect; // 명중 이팩트
+    public TextMeshProUGUI ammoText; // 탄약 UI
+    private float nextTimeToFire = 0.0f; // 다음 발사까지 걸리는 시간
 
-    public int maxAmmo = 30; // 보유 가능한 최대 총알 개수.
-    public int currentAmmo; // 현재 내가 보유한 총알 개수.
-    public ParticleSystem muzzleFlash; // 총알 발사 시 재생할 이펙트 객체
-    public AudioSource fireSound; // 총알 발사 시 재생할 사운드 객체
-
-    public BulletPool bulletPool;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        // 탄약 초기화
         currentAmmo = maxAmmo;
+        UpdateAmmoUI();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (Input.GetButtonDown("Fire1") && currentAmmo > 0)
+        // 마우스 왼쪽 클릭, 발사 시간, 탄약 개수 체크
+        if (Input.GetButton("Fire1") && Time.time > nextTimeToFire && currentAmmo > 0)
         {
+            nextTimeToFire = Time.time + fireRate;
             Shoot();
         }
-        if(Input.GetButtonDown("Reload"))
-        {
-            currentAmmo = maxAmmo;
-        }
     }
-
-    void Shoot()
+    public void Shoot()
     {
-        //GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        GameObject bullet = bulletPool.GetBullet(firePoint.position, firePoint.rotation);
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        rb.AddForce(firePoint.forward * bulletForce);
+        --currentAmmo; // 탄약 감소
+        UpdateAmmoUI();
 
-        if(muzzleFlash != null)
+        // 총구 이팩트 출력
+        if (muzzleFlash != null)
         {
             muzzleFlash.Play();
         }
 
-        if(fireSound != null && fireSound.clip != null) //AudioClip
+        // RayCast를 이용한 명중 판정
+        RaycastHit hit;
+        if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
         {
-            fireSound.Play();
+            // 대미지 처리
+            if (hit.transform.CompareTag("Enemy"))
+            {
+                Enemy target = hit.transform.GetComponent<Enemy>();
+                if (target != null)
+                {
+                    target.TakeDamage(damage);
+                }
+            }
+
+            // 명중 이팩트.
+            GameObject impact = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(impact, 1);
         }
-
-        //Destroy(bullet, 1);
-
-        --currentAmmo;
+    }
+    public void UpdateAmmoUI()
+    {
+        if (ammoText != null)
+        {
+            ammoText.text = currentAmmo + " / " + maxAmmo;
+        }
     }
 }
