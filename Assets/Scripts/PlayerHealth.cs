@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     public int hp = 100;
-    public GameObject gameOverUI;
+    //public GameObject gameOverUI;
 
     public void TakeDamage(int damage)
     {
@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour
         {
             Debug.Log("플레이어 사망");
             Cursor.lockState = CursorLockMode.None;
-            gameOverUI.SetActive(true);
+            //gameOverUI.SetActive(true);
             //게임 오버 처리. 씬 전환, 게임 오버 UI 출력
         }
     }

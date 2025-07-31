@@ -15,9 +15,9 @@ public class Gun : MonoBehaviour
     public ParticleSystem muzzleFlash; // 총구 이팩트
     public GameObject impactEffect; // 명중 이팩트
     public TextMeshProUGUI ammoText; // 탄약 UI
-    private float nextTimeToFire = 0.0f; // 다음 발사까지 걸리는 시간
+    public float nextTimeToFire = 0.0f; // 다음 발사까지 걸리는 시간
 
-    private void Start()
+    protected  virtual void Start()
     {
         // 탄약 초기화
         currentAmmo = maxAmmo;
@@ -32,6 +32,22 @@ public class Gun : MonoBehaviour
             nextTimeToFire = Time.time + fireRate;
             Shoot();
         }
+
+        if(Input.GetKeyDown(KeyCode.R) && currentAmmo < maxAmmo)
+        {
+            StartCoroutine(Reload());
+        }
+    }
+
+    protected virtual IEnumerator Reload()
+    {
+        currentAmmo = maxAmmo;
+        Debug.Log("ReLoad");
+
+        yield return new WaitForSeconds(5.0f); // 5초 대기후 아래 행동을 처리함
+
+        UpdateAmmoUI ();
+        Debug.Log("UpdateUI");
     }
     public void Shoot()
     {
@@ -39,20 +55,20 @@ public class Gun : MonoBehaviour
         UpdateAmmoUI();
 
         // 총구 이팩트 출력
-        if (muzzleFlash != null)
+        if(muzzleFlash != null)
         {
             muzzleFlash.Play();
         }
 
         // RayCast를 이용한 명중 판정
         RaycastHit hit;
-        if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
+        if(Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
         {
             // 대미지 처리
-            if (hit.transform.CompareTag("Enemy"))
+            if(hit.transform.CompareTag("Enemy"))
             {
-                Enemy target = hit.transform.GetComponent<Enemy>();
-                if (target != null)
+                EnemyAI target = hit.transform.GetComponent<EnemyAI>();
+                if(target !=  null)
                 {
                     target.TakeDamage(damage);
                 }
@@ -62,8 +78,18 @@ public class Gun : MonoBehaviour
             GameObject impact = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impact, 1);
         }
+
+        StartCoroutine(ApplyRecoil());
     }
-    public void UpdateAmmoUI()
+
+    public IEnumerator ApplyRecoil()
+    {
+        float recoilAmount = 10f;
+        fpsCamera.transform.Rotate(-recoilAmount, 0, 0);
+        yield return new WaitForSeconds(0.05f);
+        fpsCamera.transform.Rotate(recoilAmount, 0, 0);
+    }
+    virtual public void UpdateAmmoUI()
     {
         if (ammoText != null)
         {
