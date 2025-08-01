@@ -193,6 +193,11 @@ Gun 클래스를 상속해서 각각의 총기류 클래스를 구현
 적의 상태를 대기/추적/공격/사망
 상태 패턴
 최적화 : Occlusion Culling
-오브젝트의 Inspector -> Static ->Occludee Static 설정, 고정된 오브젝트에만 사용 가능
+ - 오브젝트의 Inspector -> Static ->Occludee Static 설정, 고정된 오브젝트에만 사용 가능
 Frustum Culling : 카메라에서 벗어난 오브젝트는 그리지 않는 최적화 기법
+ - windows -> Rendering -> Occlusion Culling
 NavMesh : 길찾기 방법 중 하나
+
+7.31
+NavMeshAgent
+SetDestination

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum EnemyState
 {
@@ -21,6 +22,8 @@ public class EnemyAI : MonoBehaviour
     public int attackCooldown = 1; // 공격 간격
     public int hp = 5; // 적의 체력
     private float lastAttackTime = 0f; // 마지막 공격 시간
+
+    public NavMeshAgent agent; // NavMeshAgent 컴포넌트
 
     // Update is called once per frame
     void Update()
@@ -51,8 +54,9 @@ public class EnemyAI : MonoBehaviour
                     else
                     {
                         //두 객채 사이의 방향을 계산
-                        Vector3 dir = (player.position - transform.position).normalized;
-                        transform.position += dir * speed * Time.deltaTime; // 플레이어를 향해 이동
+                        //Vector3 dir = (player.position - transform.position).normalized;
+                        //transform.position += dir * speed * Time.deltaTime; // 플레이어를 향해 이동
+                        agent.SetDestination(player.position);
                     }
                 }
                 break;
