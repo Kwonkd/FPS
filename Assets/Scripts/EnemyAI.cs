@@ -25,6 +25,8 @@ public class EnemyAI : MonoBehaviour
 
     public NavMeshAgent agent; // NavMeshAgent 컴포넌트
 
+    public Animator animator; // 애니메이터 컴포넌트
+
     // Update is called once per frame
     void Update()
     {
@@ -36,6 +38,10 @@ public class EnemyAI : MonoBehaviour
                 {
                     if(dist < chaseRange) // 인식 범위 내에 플레이어가 있다면
                     {
+                        if (animator != null)
+                        {
+                            animator.SetBool("Chase",true); // Chase 애니메이션 트리거
+                        }
                         state = EnemyState.Chase; // 상태를 Chase로 변경
                     }
                 }
@@ -45,6 +51,7 @@ public class EnemyAI : MonoBehaviour
                 {
                     if(dist > chaseRange) // 인식 범위 내에 플레이어가 없다면
                     {
+                        animator.SetBool("Chase", false);
                         state = EnemyState.Idle; // Idle 상태로 변경
                     }
                     else if (dist < attackRange) // 공격 범위 내에 플레이어가 있다면
@@ -65,6 +72,7 @@ public class EnemyAI : MonoBehaviour
                 {
                     if (dist > attackRange) // 공격 범위 밖으로 나가면
                     {
+                        animator.SetFloat("Attack", 0);
                         state = EnemyState.Chase; // Chase 상태로 변경
                     }
                     else if (Time.time - lastAttackTime > attackCooldown) // 공격 쿨타임이 지났다면
@@ -72,10 +80,15 @@ public class EnemyAI : MonoBehaviour
                         PlayerHealth ph = player.GetComponent<PlayerHealth>();
                         if(ph != null)
                         {
+                            if (animator != null)
+                            {
+                                animator.SetFloat("Attack", Time.time - lastAttackTime); // Attack 애니메이션 트리거
+                            }
                             ph.TakeDamage(attackDamage);
                             Debug.Log("Enemy attacked player for " + attackDamage + " damage.");
                         }
                         lastAttackTime = Time.time; // 마지막 공격 시간 갱신
+                        animator.SetFloat("Attack", lastAttackTime = Time.time);
                     }
                 }
                 break;
@@ -88,15 +101,20 @@ public class EnemyAI : MonoBehaviour
         
         if (hp <= 0) // 체력이 0 이하가 되면
         {
+            
             state = EnemyState.Die; // Die 상태로 변경
             Die();
         }
     }
     void Die()
     {
+        if (animator != null)
+        {
+            animator.SetBool("dead", true); // Die 애니메이션 트리거
+        }
         Debug.Log("적이 죽었습니다.");
-        ProcessDead();
-        Destroy(gameObject);
+        //ProcessDead();
+        Destroy(gameObject,3);
     }
 
     public void SetTarget(Transform target)

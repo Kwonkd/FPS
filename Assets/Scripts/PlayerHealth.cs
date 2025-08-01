@@ -15,7 +15,7 @@ public class PlayerHealth : MonoBehaviour
         if(hp <= 0)
         {
             Debug.Log("플레이어 사망");
-            Cursor.lockState = CursorLockMode.None;
+            //Cursor.lockState = CursorLockMode.None;
             //gameOverUI.SetActive(true);
             //게임 오버 처리. 씬 전환, 게임 오버 UI 출력
         }
