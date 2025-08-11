@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Target
   - Enemy
+  - Weapon
+  - SecondCamera
+  - BulletSpawn
+  - HPItem
+  - MagazineItem
   layers:
   - Default
   - TransparentFX

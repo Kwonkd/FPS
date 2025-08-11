@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3086527453655321993}
   - component: {fileID: 8386804200579873854}
   - component: {fileID: 4494847574419672013}
-  - component: {fileID: -6580748071899523018}
+  - component: {fileID: 6481677890395340322}
   m_Layer: 0
   m_Name: Prefab_Enemy
   m_TagString: Enemy
@@ -108,7 +108,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-6580748071899523018
+--- !u!114 &6481677890395340322
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,14 +117,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 544306636548888088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62e758a1c2677004a9c405c3b86004ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 0aa0aefb5b478644dbbe31da577ae323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
   player: {fileID: 0}
-  speed: 3
-  chaseRange: 10
-  attackRange: 2
+  speed: 2
+  chaseRange: 5
+  attackRange: 1.5
   attackDamage: 10
   attackCooldown: 1
-  hp: 5
+  hp: 10

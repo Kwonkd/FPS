@@ -13,9 +13,10 @@ public class PlayerMovement : MonoBehaviour
     private Transform cameraTransform; // 메인 카메라 참조.
     //private float verticalTrotation = 0f; //상하 카메라 회전 값 누적 저장.
     private float verticalRotation = 0f;
-    //public int score = 0;
+    public int score = 0;
 
     //public Transform Muzzle;
+    //public Transform Gun;
     //public GameObject Bullet;
 
     // Start is called before the first frame update
@@ -37,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
        verticalRotation -= mouseY;
        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
        cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
-      //Muzzle.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+       //Muzzle.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
  
         float moveX = Input.GetAxis("Horizontal"); //키보드의 A, D 입력 시
         float moveZ = Input.GetAxis("Vertical"); // 키보드의 W, S 입력 시

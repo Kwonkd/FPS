@@ -16,6 +16,7 @@ public class Gun : MonoBehaviour
     public GameObject impactEffect; // 명중 이팩트
     public TextMeshProUGUI ammoText; // 탄약 UI
     public float nextTimeToFire = 0.0f; // 다음 발사까지 걸리는 시간
+    public AudioSource fireSound;
 
     protected  virtual void Start()
     {
@@ -49,7 +50,7 @@ public class Gun : MonoBehaviour
         UpdateAmmoUI ();
         Debug.Log("UpdateUI");
     }
-    public void Shoot()
+    protected virtual void Shoot()
     {
         --currentAmmo; // 탄약 감소
         UpdateAmmoUI();
@@ -64,6 +65,10 @@ public class Gun : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
         {
+            if(fireSound != null)
+            {
+                fireSound.Play();
+            }
             // 대미지 처리
             if(hit.transform.CompareTag("Enemy"))
             {
@@ -96,4 +101,5 @@ public class Gun : MonoBehaviour
             ammoText.text = currentAmmo + " / " + maxAmmo;
         }
     }
+    
 }

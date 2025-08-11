@@ -9,4 +9,9 @@ public class RestartButton : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene2");
     }
+    public void NextStage()
+    {
+        WaveManager waveManager = GetComponent<WaveManager>();
+        waveManager.StartNextWave();
+    }
 }

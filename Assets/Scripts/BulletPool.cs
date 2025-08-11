@@ -4,35 +4,45 @@ using UnityEngine;
 
 public class BulletPool : MonoBehaviour
 {
-    public GameObject bulletPrefab; // 총알 프리팹
+    public GameObject bulletPrefab;
     public int poolSize = 20;
-    List<GameObject> Pool = new List<GameObject>();
+    List<GameObject> pool = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
+        //필요한 데이터 초기화
         for(int i = 0; i < poolSize; i++)
         {
             GameObject bullet = Instantiate(bulletPrefab, transform);
-            bullet.SetActive(false); // 초기에는 비활성화
-            Pool.Add(bullet);
+            bullet.SetActive(false);
+            pool.Add(bullet);
         }
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    //사용할 총알 활성화.
+    // 필요할 경우 프리팹을 로드
     public GameObject GetBullet(Vector3 pos, Quaternion rot)
     {
-        foreach(GameObject bullet in Pool) // pool list안을 순차적으로 탐색
+        foreach(GameObject bullet in pool) // pool list 안을 순차적으로 돌겠다
         {
-            if (bullet.activeInHierarchy == false) // 비활성화된 총알을 찾음
+            if(bullet.activeInHierarchy == false)
             {
-                bullet.transform.position = pos; // 총알의 위치를 지정된 위치로 설정
-                bullet.transform.rotation = rot; // 총알의 회전을 지정된 회전으로 설정
-                bullet.SetActive(true); // 총알 활성화
-                return bullet; // 활성화된 총알 반환
+                bullet.transform.position = pos;
+                bullet.transform.rotation = rot;
+                bullet.SetActive (true);
+                return bullet;
             }
         }
 
-        GameObject newBullet = Instantiate(bulletPrefab, pos, rot, transform); // 비활성화된 총알이 없는 경우 새로 생성
-        Pool.Add(newBullet); // 새 총알을 풀에 추가
+        // 사용 가능한 총알이 없으면 새로 생성
+        GameObject newBullet = Instantiate(bulletPrefab, pos, rot, transform);
+        pool.Add(newBullet);
         return newBullet;
     }
 }

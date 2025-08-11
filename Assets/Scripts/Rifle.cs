@@ -35,7 +35,7 @@ public class Rifle : Gun
                     nextTimeToFire = Time.time + fireRate;
                     Shoot();
                 }
-                if(Input.GetKeyDown(KeyCode.Y))
+                if(Input.GetButtonDown("ModeChange"))
                 {
                     gunstate = GunState.semiauto;
                 }
@@ -46,7 +46,7 @@ public class Rifle : Gun
                     nextTimeToFire = Time.time + semiautoFireRate;
                     Semiauto();
                 }
-                if (Input.GetKeyDown(KeyCode.Y))
+                if (Input.GetButtonDown("ModeChange"))
                 {
                     gunstate = GunState.auto;
                 }
@@ -64,7 +64,37 @@ public class Rifle : Gun
         {
             for (int i = 0; i < 3; i++)
             {
-                Shoot();
+                --currentAmmo; // 탄약 감소
+                UpdateAmmoUI();
+
+                // 총구 이팩트 출력
+                if (muzzleFlash != null)
+                {
+                    muzzleFlash.Play();
+                }
+
+                // RayCast를 이용한 명중 판정
+                RaycastHit hit;
+                if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hit, range))
+                {
+                    if (fireSound != null)
+                    {
+                        fireSound.Play();
+                    }
+                    // 대미지 처리
+                    if (hit.transform.CompareTag("Enemy"))
+                    {
+                        EnemyAI target = hit.transform.GetComponent<EnemyAI>();
+                        if (target != null)
+                        {
+                            target.TakeDamage(damage);
+                        }
+                    }
+
+                    // 명중 이팩트.
+                    GameObject impact = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                    Destroy(impact, 1);
+                }
             }
         }
     }
