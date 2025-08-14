@@ -63,7 +63,8 @@ public class Bullet : MonoBehaviour
 
         if(collision.gameObject.tag == "Player")
         {
-            PlayerHealth ph = collision.gameObject.GetComponent<PlayerHealth>();
+            PlayerStatus ph = collision.gameObject.GetComponent<PlayerStatus>();
+            //PlayerHealth ph = collision.gameObject.GetComponent<PlayerHealth>();
             if (ph != null)
             {
                 ph.TakeDamage(damage);

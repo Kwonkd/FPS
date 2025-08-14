@@ -22,18 +22,8 @@ public class Item : MonoBehaviour
 
     void HPItem()
     {
-        PlayerHealth ph = GameObject.FindObjectOfType<PlayerHealth>();
-        if (ph != null)
-        {
-            if (ph.hp + 10 > ph.maxHp)
-            {
-                ph.hp = ph.maxHp;
-            }
-            else
-            {
-                ph.hp += 10;
-            }
-        }
+        PlayerStatus ph = GameObject.FindObjectOfType<PlayerStatus>();
+        ph.Heal(30);
     }
     void MagazineItem()
     {
@@ -42,6 +32,11 @@ public class Item : MonoBehaviour
         {
             gun.currentAmmo = 30;
             gun.UpdateAmmoUI(); // UI 업데이트
+        }
+        Weapon weapon = GameObject.FindObjectOfType<Weapon>();
+        if(weapon != null)
+        {
+            weapon.getItem(30);
         }
     }
 }

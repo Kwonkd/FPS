@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     public void StageClear()
     {
         Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 0;
         WaveManager wManager = waveManager.GetComponent<WaveManager>();
         if(wManager != null && wManager.wave >3)
         {
@@ -30,6 +31,7 @@ public class UIManager : MonoBehaviour
         WaveManager manager = waveManager.GetComponent<WaveManager>();
         if (manager != null)
         {
+            Time.timeScale = 1;
             manager.StartNextWave();
         }
     }

@@ -103,7 +103,7 @@ public class EnemyAI : MonoBehaviour
                         if (animator != null)
                         {
                             GameObject bullet = Instantiate(bulletPrefab, firePos.transform.position, firePos.transform.rotation);
-                            StartCoroutine(DelayTime());
+                           // StartCoroutine(DelayTime());
                             if (fireSound != null)
                             {
                                 fireSound.Play();
@@ -121,7 +121,8 @@ public class EnemyAI : MonoBehaviour
                 }
                 else if(Time.time - lastAttackTime > attackCooldown)
                 {
-                    PlayerHealth ph = player.GetComponent<PlayerHealth>();
+                    PlayerStatus ph = player.GetComponent<PlayerStatus>(); 
+                    //PlayerHealth ph = player.GetComponent<PlayerHealth>();
                     if(ph != null)
                     {
                         lastAttackTime = Time.time;
@@ -155,10 +156,8 @@ public class EnemyAI : MonoBehaviour
     {
         if (animator != null)
         {
-            animator.SetBool("Hit", true);
             hp -= damage;
-            StartCoroutine(DelayTime());
-            animator.SetBool("Hit", false);
+            StartCoroutine(Hit());
         }
 
         if (hp <= 0) // 체력이 0 이하가 되면
@@ -191,11 +190,11 @@ public class EnemyAI : MonoBehaviour
             manager.OnEnemyDefeated();
         }
     }
-    public IEnumerator DelayTime()
+    public IEnumerator Hit()
     {
-        Debug.Log("딜레이 시작");
+        animator.SetBool("Hit", true);
         yield return new WaitForSeconds(0.5f);
-        Debug.Log("딜레이 끝");
+        animator.SetBool("Hit", false);
     }
 
     void Direction() // 플레이어와 게임 오브젝트 간의 방향 계산 함수

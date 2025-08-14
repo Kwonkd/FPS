@@ -7,6 +7,7 @@ public class RestartButton : MonoBehaviour
 { 
     public void Restartbutton()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("SampleScene2");
     }
     public void NextStage()
