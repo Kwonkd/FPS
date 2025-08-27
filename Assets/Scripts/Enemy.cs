@@ -6,7 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int health = 50; // 적 체력
-    public EnemyAI enemyAI;
+    //public EnemyAI enemyAI;
 
     //대미지 처리 함수
     public void TakeDamage(int damage)

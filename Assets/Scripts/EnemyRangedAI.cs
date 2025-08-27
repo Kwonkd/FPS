@@ -101,7 +101,5 @@ public class EnemyRangedAI : MonoBehaviour
     void RangedAttack()
     {
         GameObject prefabBullet = Instantiate(bullet, firePoint.position, Quaternion.identity);
-        Rigidbody bulletRb = prefabBullet.GetComponent<Rigidbody>();
-        if(bulletRb != null )  bulletRb.AddForce(transform.forward * shootSpeed, ForceMode.Impulse);
     }
 }
