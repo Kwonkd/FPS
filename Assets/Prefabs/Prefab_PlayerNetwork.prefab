@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 2996666484792147814}
   - component: {fileID: -3036290218563508177}
   - component: {fileID: 2971836798137471375}
-  - component: {fileID: -6152070185368480801}
   - component: {fileID: -8695100620206187469}
   - component: {fileID: 2356638536762648245}
+  - component: {fileID: 8555465822958565907}
+  - component: {fileID: 4600249410700898346}
   m_Layer: 0
   m_Name: Prefab_PlayerNetwork
   m_TagString: Untagged
@@ -74,6 +75,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraMount: {fileID: 4624560327548268506}
+  pitchPivot: {fileID: 9002347511272203331}
   attachCameraOnOwner: 1
 --- !u!143 &2971836798137471375
 CharacterController:
@@ -101,22 +103,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &-6152070185368480801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4053884825086388192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2144707eceea17d4fb8c3faa9b02214a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 4
-  rotateSpeed: 150
-  gravity: 9.81
-  jumpSpeed: 5
 --- !u!114 &-8695100620206187469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +148,38 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &8555465822958565907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4053884825086388192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d62b9d390a1fec84491bff24973e38d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 4
+  rotateSpeed: 150
+  gravity: 9.81
+  jumpSpeed: 5
+--- !u!114 &4600249410700898346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4053884825086388192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b94c656135b98094abf7f3d92fcc2496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pitchPivot: {fileID: 9002347511272203331}
+  mouseSensitivity: 1.5
+  minPitch: -70
+  maxPitch: 70
 --- !u!1 &4475224729809215722
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,7 +315,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 9002347511272203331}
   m_Father: {fileID: 5431356307894781213}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6330188309532965147
@@ -311,6 +330,7 @@ GameObject:
   - component: {fileID: 9222067286741091334}
   - component: {fileID: 3275689413084930238}
   - component: {fileID: 5826411794270218369}
+  - component: {fileID: 5383478133218917577}
   m_Layer: 5
   m_Name: WorldText
   m_TagString: Untagged
@@ -434,6 +454,58 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5383478133218917577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6330188309532965147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d9a62001404c74dbe1487bd43e16f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yawOnly: 1
+  targetCameraTransform: {fileID: 0}
+  hideWhenBehind: 1
+  behindDotThreshold: 0
+  distanceScaling: 1
+  nearDistance: 2
+  farDistance: 20
+  maxScale: 1
+  minScale: 0.6
+--- !u!1 &6545213497520545760
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9002347511272203331}
+  m_Layer: 0
+  m_Name: PitchPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9002347511272203331
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6545213497520545760}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4624560327548268506}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6827777578175857916
 GameObject:
   m_ObjectHideFlags: 0

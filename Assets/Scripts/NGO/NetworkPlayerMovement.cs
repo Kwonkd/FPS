@@ -11,7 +11,7 @@
 using UnityEngine;
 using Unity.Netcode;
 
-[RequireComponent(typeof(CharacterController))] //오브젝트에 캐릭터 컨트롤러 컴포넌트 추가
+[RequireComponent(typeof(CharacterController))]
 public class NetworkPlayerMovement : NetworkBehaviour
 {
     public float moveSpeed = 4.0f;      // 평면 이동 속도

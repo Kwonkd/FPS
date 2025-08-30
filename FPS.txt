@@ -558,3 +558,7 @@ NetworkManager
 UnityTransport
 
 Networkobject
+
+8.29
+빌보드 (BillBoard)
+ - 3D 공간 상에 띄워진 2D 이미지나 UI가 항상 카메라를 바라보게 마드는 방법
