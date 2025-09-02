@@ -578,3 +578,24 @@ Networkobject
 RPC (Remove Procedure Call) -  원격 프로시버 호출
  : 다른 프로그램의 함수를 원격으로 호출하는 것
  - 다른 시스템에 있는 함수 호출을 통해 데이터 송/수신을 할 수 있다.
+
+9.2
+팀
+서버 접속 -> 팀 배정 -> 스폰 위치에 배치 -> 전투
+
+서버 권한
+ - 매치 시간 감소, 팀 점수 증가 (팀원이 다른 플레이어를 죽였을 때), 플레이어 킬 상황 표시
+
+포트 포워딩 : 인터넷 공유기 설정을 수정해서 외부에 있는 pc가 서버에 접속이 가능하도록 만드는 작업
+유동 아이피 : 언제든 바뀔 수 있음. 바뀌었을 경우 외부에서 더 이상 접속 불가
+포트 포워딩 작업을 통해 고정 아이피로 접속을 할 수 있게 해줘야 한다.
+
+NetworkVariable : Unity Netcode에서 제공하는 네트워크 상에서 클라이언트들이 공유할 수 있는 변수
+
+함수 오버로딩 : 이름이 같고 파라미터의 개수가 다른 함수를 선언.
+
+NetworkVariable : Unity Netcode에서 제공하는 네트워크 상에서 클라이언트들이 공휴할 수 있는 변수
+
+Player 프리팹에 NetworkPlayerStats, HeadHPBar 스크립트 추가
+씬에 GameModeSever 오브젝트를 생성하고 GameModeServer 스크립트 추가
+캔버스에 KillFeedUI, ScoreboardUI 스크립트 추가
