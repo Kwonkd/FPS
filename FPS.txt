@@ -599,3 +599,7 @@ NetworkVariable : Unity Netcode에서 제공하는 네트워크 상에서 클라
 Player 프리팹에 NetworkPlayerStats, HeadHPBar 스크립트 추가
 씬에 GameModeSever 오브젝트를 생성하고 GameModeServer 스크립트 추가
 캔버스에 KillFeedUI, ScoreboardUI 스크립트 추가
+
+9.3
+서버 권한 확장
+ - 이동, 마우스 좌우 회전까지 서버가 판정 : 클라이언트는 키를 눌러 서버쪽으로 요청만 함
